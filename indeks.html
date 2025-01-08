@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal Branding - Nama Kamu">
+    <title>Personal Branding - Dava</title>
+    <style>
+        /* Reset Margin & Padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background */
+        body, html {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #34495e); /* Gradasi biru gelap */
+            color: #ecf0f1;
+            height: 100%;
+            overflow-x: hidden; /* Menghindari scroll horizontal */
+        }
+
+        /* Container untuk menampilkan layout */
+        .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: row;
+            width: 100%;
+            min-height: 100vh; /* Container harus memenuhi seluruh tinggi layar */
+            overflow: auto; /* Memungkinkan scroll */
+            padding: 20px; /* Menambahkan ruang di luar konten */
+        }
+
+        /* Sidebar Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #2c3e50;
+            padding-top: 60px;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
+            transition: transform 0.4s ease-in-out; /* Animasi slide-in */
+            z-index: 1000;
+        }
+
+        nav a {
+            display: block;
+            padding: 15px 25px;
+            font-size: 1.1rem; /* Ukuran font menu */
+            color: #ecf0f1;
+            text-decoration: none;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #f39c12; /* Highlight when hover */
+            transform: scale(1.05);
+        }
+
+        nav .menu-icon {
+            display: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            margin-left: 270px; /* Memberi ruang untuk sidebar */
+            padding: 30px;
+            overflow-y: auto;
+            transition: all 0.4s ease-out;
+            margin-right: 20px; /* Memberikan sedikit ruang di kanan konten */
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px 20px;
+            background-color: rgba(44, 62, 80, 0.9); /* Transparan biru */
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease-in-out;
+            margin-bottom: 20px; /* Memberikan ruang bawah pada header */
+        }
+
+        footer {
+        text-align: center;
+        
+        }
+
+        /* Foto Profil */
+        header img {
+            border-radius: 50%; /* Tetap lingkaran */
+            width: 180px;  /* Ukuran yang lebih besar untuk foto */
+            height: 180px; /* Ukuran yang lebih besar untuk foto */
+            object-fit: cover; /* Memastikan gambar terpotong proporsional */
+            margin-right: 20px; /* Jarak antara gambar dan teks */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Menambahkan efek bayangan ringan */
+            animation: fadeIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.0rem; /* Ukuran judul utama */
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #f39c12; /* Warna emas */
+            animation: fadeIn 1s ease-out; /* Animasi fade-in untuk nama */
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: #bdc3c7;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(30) 1s infinite, blink 0.75s step-end infinite;
+            animation-duration: 5s;
+        }
+
+        /* Animasi mengetik */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+        .about-text {
+            text-align: justify; /* Membuat teks rata kanan-kiri */
+            line-height: 1.8; /* Menambah jarak antar baris agar lebih rapi */
+            font-size: 16px; /* Ukuran font (opsional) */
+            color: #333; /* Warna teks (opsional) */
+            opacity: 0; /* Awal animasi */
+            transform: translateY(-20px); /* Posisi awal elemen */
+            animation: fadeInUp 1.5s ease-out forwards; /* Durasi animasi lambat */
+        }
+
+
+        /* Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            align-items: flex-start;
+            gap: 20px;
+            margin-top: 20px;
+        }
+            
+        .social-media {
+            display: flex;
+            align-items: flex-start;
+            text-align: center;
+            padding: 10px 20px;
+            padding: 10px 15px;
+            border: 2px solid #067474;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 250px;
+            justify-content: space-between;
+        }
+            
+        .social-media:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px#333(0, 0, 0, 0.4);
+        }
+            
+        .social-media img {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px; 
+            border-radius: 15%;
+            float: left;
+        }
+            
+        .social-media a {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+            
+        .social-media a:hover {
+            color: #00aaaa;
+        }
+
+        .content {
+            margin-top: 15px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInUp 0.5s ease-out forwards;
+            min-height: 100%; /* Memastikan konten penuh dan dapat digulir */
+        }
+
+        .content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section styles */
+        section h2 {
+            font-size: 2rem; /* Mengurangi ukuran judul bagian */
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #f39c12;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+        }
+
+        .skills ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .skills li {
+            background-color: #34495e;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1.1rem; /* Ukuran font skill */
+            transition: transform 0.3s ease;
+        }
+
+        .skills li:hover {
+            transform: scale(1.05);
+            background-color: #f39c12; /* Efek hover di skill */
+            transition: transform 0.5s ease, background-color 0.5s ease;
+        }
+
+        /* Progress Bars for Skills */
+        .progress-bar {
+            width: 100%;
+            background-color: #bdc3c7;
+            border-radius: 10px;
+            margin: 10px 0;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-weight: bold;
+            width: 0;
+            transition: width 2s ease-in-out; /* Animasi pergerakan progress */
+        }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(44, 62, 80, 0.9);
+            color: #ecf0f1;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+            
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeInSlow {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Mulai dari bawah */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); /* Berakhir di posisi awal */
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+                animation: fadeInUp 1.5s ease-out forwards; /* Perpanjang durasi menjadi 1.5 detik */
+        }
+
+        header img, header h1 {
+                animation: fadeIn 2s ease-out; /* Perpanjang durasi menjadi 2 detik */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px; /* Mengurangi padding di perangkat kecil */
+            }
+
+            header {
+                text-align: left;
+                padding: 40px 20px;
+            }
+
+            header img {
+                margin-top: 10px;
+                width: 100px;
+                height: 100px;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform: translateX(-100%);
+                z-index: 10;
+            }
+
+            nav a {
+                padding: 12px 20px;
+                font-size: 1.2rem;
+            }
+
+            nav .menu-icon {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                font-size: 2rem;
+                cursor: pointer;
+                color: #f39c12;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .gallery {
+                 display: grid;
+                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Grid responsif */
+                 gap: 20px; /* Jarak antar gambar */
+                 margin-top: 20px;
+            }
+
+            .gallery img {
+                width: 100%;
+                height: auto; /* Gambar proporsional */
+                border-radius: 10px; /* Bikin sudut melengkung */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animasi hover */
+            }
+
+  /* Efek hover untuk gambar */
+            .gallery img:hover {
+                transform: scale(1.05); /* Sedikit perbesar */
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Perbesar bayangan */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <!-- Sidebar Menu -->
+        <nav id="sidebar">
+            <a href="#about" onclick="showContent('about')"><span class="icon">💁‍♂️</span> Tentang Saya</a>
+            <a href="#skills" onclick="showContent('skills')"><span class="icon">🛠️</span> SKILLS</a>
+            <a href="#Education" onclick="showContent('Education')"><span class="icon">🌆</span> Pendidikan</a>
+            <a href="#experience" onclick="showContent('experience')"><span class="icon">📚</span> Pengalaman</a>
+            <a href="#contact" onclick="showContent('contact')"><span class="icon">📞</span> Sosial Media</a>
+            <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <img src="FOTO NE DAVA.jpg" alt="Foto Profil"> <!-- Ganti dengan URL foto Anda -->
+                <div>
+                    <h1>Muhammad Dava Hafiz Permana</h1>
+                    <p> <span class="typing-animation">Universitas Teknologi Yogyarta - Prodi Informatika 2024</span></p>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div id="about" class="about-text">
+                <section>
+                    <h2>Tentang Saya</h2>
+                    <p>Perkenalkan saya Muhammad Dava Hafiz Permana, saya merupakan mahasiswa dari Universitas Teknologi Yogyakarta prodi Informatika 2024. Saya lahir di Boyolali jawa tengah, pada 04 maret 2006, saat ini saya berumur 18 thn. Saya merupakan anak ke 2 dari 3 bersaudara, kakak saya sedang menempuh kuliah yang sudah mencapai semester 5, sementara saya dan adik saya baru saja menempuh masa kuliah baru di semester 1 mau ke semester 2.</p>
+                    <p>Saya memiliki hobi yaitu menggambar, membaca buku, dan badminton, saya juga suka suatu hal yang berkaitan dengan seni dan budaya, seperti batik, tarian daerah, pakaian daerah, dan lain sebagainya. Saya pernah mengikuti kegiatan ekstrakurikuler paskibra disekolah pada tingkat SMP dan sudah mengikuti beberapa lomba. Pada saat itu saya memiliki impian untuk menjadi bagian dari anggota paskibraka tingkat provinsi, akan tetapi pada saat itu, terjadi suatu kejadian, yang dimana terpaksa saya harus merelakan impian saya tersebut.</p>
+                    <p>Impian saya tidak hanya itu saja, Saya juga punya cita cita, yaitu menjadi bos muda di suatu perusahaan besar, yang dimana saya dengan sangat berusaha, saat saya sudah dewasa nanti, saya bisa membahagiakan kedua orang tua saya dan membalas segala kebaikan dari kedua orang tua saya. Tanpa perjuangan kedua orang tua saya, mungkin saya tidak akan bisa melanjutkan pendidikan saya yaitu diperkuliahan, karena bisa dibilang saya dari keluarga sederhana, yang dimana kedua orang tua saya mengkuliahkan 3 orang anaknya, yang dimana itu memerlukan biaya yang tidak sedikit dan juga sangat banyak. </p>
+                    <p>Saat ini saya sedang berproses untuk menjadi pribadi yang lebih baik, mungkin dengan membaca buku yang bisa membantu saya untuk merubah kebiasaan buruk menjadi kebiasaan yang bermanfaat, mengikuti seminar dan webinar yang bermanfaat bagi masa depan saya, belajar public speaking, dan mengembangkan skill saya, suatu saat nanti, saya ingin menjadi orang yang sukses dengan skill yang saya miliki dan membuat orang tua saya bangga, saya akan terus berjuang walaupun sakit dan berat diawal, tapi itu semua demi akhir yang indah untuk saya, keluarga saya, orang tua saya.</p>
+                    <p>Impian saya memang terdengar sangat tinggi bagi saya yang saat ini belum bisa menghasilkan apapun, tetapi jika dengan doa dan usaha, maka saya merasa yakin bahwa tidak ada yang mustahil.</p>
+                    <p>"Anyone can be anything, when there is a wil there is way"</p>
+                    <p>Saya siap menjadi bagian dari generasi emas 2045.</p>
+                    
+                </section>
+            </div>
+            <div id="skills" class="content">
+                <section>
+                    <h2>Skills</h2>
+                    <ul class="skills">
+                        <img src="Skill 1.jpg" alt="Art Jujutsu Kaisen Season 2" width="250" height="150">
+                        <img src="Yearbook.PNG" alt="Foto Dava" width="150" height="150">
+                        <img src="Skill 2.jpg" alt="Art Mahiru Shiina" width="150" height="150">
+                        <img src="Skill 3.jpg" alt="Art " width="150" height="150">
+                        <img src="skill 5.jpg" alt="Art " width="150" height="150">
+                        <img src="Skill 9.jpg" alt="Art " width="150" height="150">
+                        <img src="Skill 10.jpg" alt="Art " width="150" height="150">
+                        <img src="skill 6.jpg" alt="Art Jujutsu Kaisen Manga" width="250" height="150">
+                    </ul>
+                </section>
+            </div>
+            <div id="Education" class="content">
+                <section>
+                    <h2>Pendidikan</h2>
+                        <li><strong> 2012 - 2018</strong>  | SDN 1 PENGGUNG BOYOLALI & SD KARTIKA VII-I DENPASAR</li>
+                        <li><strong> 2018 - 2021</strong>  | SMPK 1 HARAPAN DENPASAR</li>
+                        <li><strong> 2021 - 2024</strong>  | SMAN 3 DENPASAR</li>
+
+                    </ul>
+                </section>
+            </div>
+
+            <div id="experience" class="gallery">
+                <section>
+                    <p></p>
+                    <h2>Pengalaman</h2>
+                        <li>Membuat Database Penyumbangan Donor Darah</li>
+                        <li>Membuat aplikasi pemesanan tiket bioskop</li>
+                        <li>Mengikuti perlombaan LKBB tingkst SMP</li>
+                        <li>Menjadi Hakim Garis Dalam Perlombaan LKBB Pramuka Tingkat SMA</li>
+                        <li>Melatih anggota pasukan paskibra tingkat SMP untuk persiapan lomba</li>
+                        <p></p>
+                        <div class="gallery"></div>
+                        <img src="image.png" alt="Database Penyumbangan Donor Daraah" width="250" height="150">
+                        <img src="image copy.png" alt="Bioskop" width="250" height="150">
+                        <img src="Pengalaman paskib.jpg" alt="Bioskop" width="250" height="150">
+                </section>
+            </div>
+    
+            <div id="contact" class="Sosial-media">
+                <section>
+                    <p></p>
+                    <h2>Contact & Sosial Media</h2>
+                    <div class="social-media">
+                        <img src="Instagram icon.png" alt="Instagram">
+                        <a href="https://www.instagram.com/meowdv_/#" target="_blank">Instagram</a>
+                    </div>
+                    <p></p>
+                    <div class="social-media">
+                        <img src="youtube icon.png" alt="YouTube">
+                        <a href="https://youtube.com/@21_muhammaddavahafizperman74?si=J40e498gGlD5BJDU" target="_blank">YouTube</a>
+                    </div>
+                    <p></p>
+                    <div class="social-media">
+                        <img src="WA.png" alt="Whatsapp">
+                        <a href="https://wa.me/qr/KRQ5ZZAA2GEXK1" target="_blank">Whatsapp</a>
+                    </div>
+                </section>
+            </div>
+            
+    <script>
+        // Fungsi untuk menampilkan konten sesuai menu yang dipilih
+        function showContent(contentId) {
+            const sections = document.querySelectorAll('.content');
+            sections.forEach(section => {
+                section.classList.remove('show');
+            });
+            const selectedSection = document.getElementById(contentId);
+            selectedSection.classList.add('show');
+        }
+
+        // Menampilkan "Tentang Saya" secara default saat halaman pertama kali dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            showContent('about');
+        });
+
+        // Toggle Sidebar Menu pada perangkat kecil
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const isOpen = sidebar.style.transform === 'translateX(0px)';
+            if (isOpen) {
+                sidebar.style.transform = 'translateX(-100%)';
+            } else {
+                sidebar.style.transform = 'translateX(0)';
+            }
+        }
+    </script>
+</body>
+</html>
